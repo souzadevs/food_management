@@ -15,9 +15,15 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("company_id");
             $table->string("description");
             $table->timestamps();
             $table->softDeletes();
+
+            $table
+                ->foreign("company_id")
+                ->references("id")
+                ->on("company");
         });
     }
 

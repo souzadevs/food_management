@@ -17,12 +17,24 @@ class CreateProfileRoleTable extends Migration
             $table->id();
             $table->unsignedBigInteger("profile_id");
             $table->unsignedBigInteger("role_id");
+            $table->unsignedBigInteger("company_id");
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign("profile_id")->references("id")->on("profiles");
-            $table->foreign("role_id")->references("id")->on("roles");
-            
+            $table
+                ->foreign("profile_id")
+                ->references("id")
+                ->on("profiles");
+
+            $table
+                ->foreign("role_id")
+                ->references("id")
+                ->on("roles");
+
+            $table
+                ->foreign("company_id")
+                ->references("id")
+                ->on("company");
         });
     }
 

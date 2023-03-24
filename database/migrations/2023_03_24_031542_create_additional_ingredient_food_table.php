@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfileUserTable extends Migration
+class CreateAdditionalIngredientFoodTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,32 @@ class CreateProfileUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_user', function (Blueprint $table) {
+        Schema::create('additional_ingredient_food', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("profile_id");
-            $table->unsignedBigInteger("user_id");
+
+            $table->unsignedBigInteger("food_order_id");
+            $table->unsignedBigInteger("additional_ingredient_id");
             $table->unsignedBigInteger("company_id");
+
+            $table->integer("quantity");
+
             $table->timestamps();
             $table->softDeletes();
-
-            $table
-                ->foreign("profile_id")
-                ->references("id")
-                ->on("profiles");
-
-            $table
-                ->foreign("user_id")
-                ->references("id")
-                ->on("users");
 
             $table
                 ->foreign("company_id")
                 ->references("id")
                 ->on("company");
+
+            $table
+                ->foreign("food_order_id")
+                ->references("id")
+                ->on("food_order");
+
+            $table
+                ->foreign("additional_ingredient_id")
+                ->references("id")
+                ->on("additional_ingredients");
         });
     }
 
@@ -45,6 +49,6 @@ class CreateProfileUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_user');
+        Schema::dropIfExists('additional_ingredient_food');
     }
 }

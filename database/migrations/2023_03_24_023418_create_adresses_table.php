@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration
+class CreateAdressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,25 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('adresses', function (Blueprint $table) {
             $table->id();
-            $table->string("description");
-            $table->unsignedBigInteger("profile_id");
+
             $table->unsignedBigInteger("company_id");
+
+            $table->string("city");	
+            $table->string("neighborhood");	
+            $table->string("street");	
+            $table->string("number");	
+            $table->string("obs");	
+            $table->string("cep");
+
             $table->timestamps();
             $table->softDeletes();
             
             $table
-                ->foreign("profile_id")
-                ->references("id")
-                ->on("profiles");
-
-            $table
                 ->foreign("company_id")
                 ->references("id")
                 ->on("company");
-
-
         });
     }
 
@@ -42,6 +42,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('adresses');
     }
 }
